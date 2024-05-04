@@ -1,3 +1,16 @@
    #=========================== Django =================================#
  
 Here you will be find out the path and guide to learn and build app using Django
+#install virtual env 
+
+pyhton -m venv myenv
+
+#activate env :
+./myenv/Scripts/activate
+
+Django -admin 
+
+
+#use the below command to create the django project in env enabled  :
+
+django-admin startproject 'project_name' 
