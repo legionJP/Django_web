@@ -14,3 +14,6 @@ Django -admin
 #use the below command to create the django project in env enabled  :
 
 django-admin startproject 'project_name' 
+
+
+#seetting up the url path
