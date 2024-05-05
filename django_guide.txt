@@ -60,3 +60,10 @@ $ python manage.py startapp 'appname'
 ...\> py manage.py startapp 'appname'
 
 
+#==========================================================
+# Templates :
+#========================
+blog_app -> Templates -> blog_app -> template.html
+
+#using the template inherritance 
+
