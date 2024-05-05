@@ -17,3 +17,46 @@ django-admin startproject 'project_name'
 
 
 #seetting up the url path
+
+#run the django app
+
+python manage.py runserver
+
+#for window
+
+py manage.py runserver
+
+#changing the port 
+
+#default port 
+py manage.py runserver 8080
+
+#to listen on port on the network 
+py manage.py runserver 0.0.0.0:8000
+
+#===========================================================
+#Creating the Polls app
+#=======================================================
+Django comes with a utility that automatically generates the basic directory structure of an app, 
+so you can focus on writing code rather than creating directories.
+
+
+#---------------------------------------------
+#Project Vs app
+#-----------------------------------
+Project : 
+ A project is a collection of configuration and apps for a particular website.
+App: 
+ An app is a web application that does something
+  – e.g., a blog system, a database of public records or a small poll app. 
+
+A project can contain multiple apps. An app can be in multiple projects.
+
+To create your app, make sure you’re in the same directory as manage.py and type this command:
+
+$ python manage.py startapp 'appname'
+
+#window
+...\> py manage.py startapp 'appname'
+
+
