@@ -19,6 +19,10 @@ from django.urls import path , include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blog_app/',include('blog_app.urls'))  #including the path from blog_app in project, here the include 
-                                                  #is chopping off the blog_app from .urls because first it goes to blog_app already 
-]                                                  #returning the empty string 
+    path('',include('blog_app.urls'))  #leaving the route empty so that is will go to hme of the blog_app
+
+]  #
+   
+   #including the path from blog_app in project, here the include 
+     #is chopping off the blog_app from .urls because first it goes to blog_app already 
+            #returning the empty string 
