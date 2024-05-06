@@ -45,8 +45,8 @@ def home(request):
         'posts':posts   #posts variable will be equal to post data which is equal to posts data 
     }
     #return HttpResponse('<h1> Blog Home </h1>')
-    return render(request,'blog_app/home.html',context)  #this render template still retrun the htpp response in background
+    return render(request,'blog_app/home.html', context)  #this render template still retrun the htpp response in background
 
 def about(request):
     #return HttpResponse('<h1> About Page </h1>')
-    return render(request,'blog_app/about.html',{'title':'About'}) #passing the default title 
+    return render(request,'blog_app/about.html', {'title':'About'}) #passing the default title 
