@@ -68,6 +68,17 @@ blog_app -> Templates -> blog_app -> template.html
 #using the template inherritance 
 
 
+#====================================================#
+#Creating SuperUser for the admin Page to access it 
+#====================================================#
+#first we have to make the db migrations to create the database where user_auth table will be created for admin data
 
+python manage.py migrate 
 
+#for upgrading the db changes 
+python manage.py makemigrations
+
+#create the admin superr user
+
+python manage.py create Superuser
 WXmGTLqkG8
