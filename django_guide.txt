@@ -67,3 +67,7 @@ blog_app -> Templates -> blog_app -> template.html
 
 #using the template inherritance 
 
+
+
+
+WXmGTLqkG8
