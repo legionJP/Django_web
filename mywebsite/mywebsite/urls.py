@@ -19,11 +19,13 @@ from django.urls import path , include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from users import views as user_views
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('register/',user_views.register, name='register'), #dircetly adding route 
     path('',include('blog_app.urls'))  #leaving the route empty so that is will go to hme of the blog_app
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

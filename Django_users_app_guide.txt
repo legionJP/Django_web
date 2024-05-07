@@ -1,0 +1,7 @@
+
+#create the app 
+python manage.py stratapp users
+
+#add the app in the mywebsites project's seettings.py installed list:
+
+

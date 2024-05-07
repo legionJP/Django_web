@@ -1,0 +1,26 @@
+{% extends "blog_app/base.html "%}
+
+{% block content %}
+
+<div class="content-section"> 
+    <!-- #Adding the CSRF token to prevent the attack -->
+    <form method="post">   
+        {% csrf_token %}
+        <fieldset class="from-group">
+            <legend class="border-bottom mb-4">Join Now</legend>
+            {{ form.as_p  }}  <!--Display or print the form-->
+        </fieldset>
+
+        <div class="from-group">
+            <button class="btn btn-outline-info" type="submit">Sign up</button>
+        </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already Have an Account! <a  class="ml-2" href="#">Sign In</a>
+
+         </small>
+    </div>
+</div>
+
+{% endblock content %}

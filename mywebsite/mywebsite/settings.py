@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'blog_app.apps.BlogAppConfig',   #Adding application to this list bcz every time you create the new application , djnago use it to search the template for this app
+    'blog_app.apps.BlogAppConfig',          #Adding application to this list bcz every time you create the new application , djnago use it to search the template for this app
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

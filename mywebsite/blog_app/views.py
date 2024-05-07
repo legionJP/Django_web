@@ -7,41 +7,6 @@ from .models import Post
 
 #creating logic to handle the routes 
 
-
-posts = [
-    {
-        "author": "Author1",
-        "title": "Title1",
-        "content": "Content1",
-        "date_posted": "2024-05-01"
-    },
-    {
-        "author": "Author2",
-        "title": "Title2",
-        "content": "Content2",
-        "date_posted": "2024-05-02"
-    },
-    {
-        "author": "Author3",
-        "title": "Title3",
-        "content": "Content3",
-        "date_posted": "2024-05-03"
-    },
-    {
-        "author": "Author4",
-        "title": "Title4",
-        "content": "Content4",
-        "date_posted": "2024-05-04"
-    },
-    {
-        "author": "Author5",
-        "title": "Title5",
-        "content": "Content5",
-        "date_posted": "2024-05-05"
-    }
-]
-
-
 def home(request):
     context ={
         'posts':Post.objects.all()   #posts variable will be equal to post data which is equal to posts data 
