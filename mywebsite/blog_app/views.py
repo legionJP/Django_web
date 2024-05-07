@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from .models import Post
+
 #from django.http import HttpResponse
 
 # Create your views here.
@@ -42,7 +44,7 @@ posts = [
 
 def home(request):
     context ={
-        'posts':posts   #posts variable will be equal to post data which is equal to posts data 
+        'posts':Post.objects.all()   #posts variable will be equal to post data which is equal to posts data 
     }
     #return HttpResponse('<h1> Blog Home </h1>')
     return render(request,'blog_app/home.html', context)  #this render template still retrun the htpp response in background
