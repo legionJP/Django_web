@@ -5,3 +5,18 @@ python manage.py stratapp users
 #add the app in the mywebsites project's seettings.py installed list:
 
 
+#install the crispy -form for user registrations 
+
+pip install django-crispy-form
+
+#Add the installed app in settings.py 
+'crispy_forms',
+'crispy_bootstrap4
+
+#Also add the Template pack for bootstrap
+
+CRISPY_TEMPLATE_PACK ='bootstrap4
+
+#then load the templates with 
+{% load crispy_forms_tags %}
+ {{ form|crispy }}
