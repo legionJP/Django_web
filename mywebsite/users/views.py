@@ -12,8 +12,8 @@ def register(request):
         if form.is_valid():
             form.save()  #it will save and hashed the password 
             username = form.cleaned_data.get('username') #cleaned_data is dict where the data will be stored 
-            messages.success(request,f'Account created for {username}!')
-            return redirect('blog_app-home') #redirecting to the  home by name of the blog_app home 
+            messages.success(request,f'Account created for {username}! You can Login Now.')
+            return redirect('login') #redirecting to the  home by name of the blog_app home 
     else:
         form = UserRegisterForm()    
     return render(request, 'users/register.html', {'form': form}) #passing the form as a context so we can access form within the template

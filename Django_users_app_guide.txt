@@ -20,3 +20,6 @@ CRISPY_TEMPLATE_PACK ='bootstrap4
 #then load the templates with 
 {% load crispy_forms_tags %}
  {{ form|crispy }}
+
+
+ #Implemetning logging 

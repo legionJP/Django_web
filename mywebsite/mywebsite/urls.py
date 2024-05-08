@@ -14,7 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+from django.contrib import admin 
+from django.contrib.auth import views as auth_views 
 from django.urls import path , include
 from django.conf import settings
 from django.conf.urls.static import static
@@ -26,7 +27,9 @@ from users import views as user_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/',user_views.register, name='register'), #dircetly adding route 
-    path('',include('blog_app.urls'))  #leaving the route empty so that is will go to hme of the blog_app
+    path('login/',auth_views.LoginView.as_view(template_name ='users/login.html'), name='login'),
+    path('logout/',auth_views.LogoutView.as_view(template_name ='users/logout.html'), name='logout'),  #here login and logout are the class base views
+    path('',include('blog_app.urls'))  #leaving the route empty so that is will go to home of the blog_app as a default route
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
    
