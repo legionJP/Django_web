@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -121,6 +121,8 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media') #THIUS IS the dir. where the uploaded media files are saved 
+MEDIA_URL = '/media/'        #media url is the public url of the media directory 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #CRISPY_TEMPLATE_PACK = 'uni_form'
 
@@ -133,4 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Creating the new settings for the login redirect of the user which by default redirect to user profile
 
 LOGIN_REDIRECT_URL = 'blog_app-home'
-LOGOUT_REDIRECT_URL = 'logout'
+LOGIN_URL = 'login'
+# LOGOUT_REDIRECT_URL = 'logout'

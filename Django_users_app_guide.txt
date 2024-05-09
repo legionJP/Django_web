@@ -23,3 +23,28 @@ CRISPY_TEMPLATE_PACK ='bootstrap4
 
 
  #Implemetning logging 
+
+#Accesing the Profile Models 
+python manage.py shell
+ >>> from django.contrib.auth.models import User
+>>> user = User.objects.filter(username = 'JP').first()
+>>> user
+<User: JP>
+>>> user.profile
+<Profile: JP Profile>
+>>> user.profile.image
+<ImageFieldFile: profile_pics/637966.jpg>
+>>> user.profile.image.width
+1600
+>>> user.profile.image.height 
+1000
+>>> user.profile.image.url
+'/profile_pics/637966.jpg'
+
+
+#For user profile we need to add the media route or static route file  in url pattern of project's url.py
+
+#this is diffrent of development and deployement 
+
+
+

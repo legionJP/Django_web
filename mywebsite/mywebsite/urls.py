@@ -27,6 +27,7 @@ from users import views as user_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/',user_views.register, name='register'), #dircetly adding route 
+    path('profile/',user_views.profile, name='profile'),
     path('login/',auth_views.LoginView.as_view(template_name ='users/login.html'), name='login'),
     path('logout/',auth_views.LogoutView.as_view(template_name ='users/logout.html'), name='logout'),  #here login and logout are the class base views
     path('',include('blog_app.urls'))  #leaving the route empty so that is will go to home of the blog_app as a default route
@@ -36,3 +37,7 @@ urlpatterns = [
    #including the path from blog_app in project, here the include 
      #is chopping off the blog_app from .urls because first it goes to blog_app already 
             #returning the empty string 
+
+if settings.DEBUG:
+        
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
