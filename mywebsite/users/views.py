@@ -1,5 +1,6 @@
 from django.shortcuts import render , redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 #from django.contrib.auth.forms import UserCreationForm #for creating the from from django 
 from .forms import UserRegisterForm #using it in the place of  Usercreation 
 
@@ -18,7 +19,9 @@ def register(request):
         form = UserRegisterForm()    
     return render(request, 'users/register.html', {'form': form}) #passing the form as a context so we can access form within the template
 
-
+@login_required
+def profile(request):
+    return render(request , 'users/profile.html')
 
 # message.debug
 # message.info , messages.success, message.warning, message.error

@@ -80,8 +80,8 @@ python manage.py makemigrations
 
 #create the admin superr users
 
-python manage.py create Superuser
-WXmGTLqkG8
+python manage.py createsuperuser
+
 
 
 #Creating Models of DB  
