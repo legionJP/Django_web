@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User  #Django created the user model in this location 
-
+from django.urls import reverse
 # Create your models here.
 
 class Post(models.Model): #inheriting model form models , so each class is now going to be it's own table in database
@@ -14,3 +14,7 @@ class Post(models.Model): #inheriting model form models , so each class is now g
     def __str__(self):
         return self.title
          
+#reverse function for returning the the url as a string and the view will handle it 
+    def get_absolute_url(self):
+        return reverse('post-detail', kwargs={'pk':self.pk})
+    

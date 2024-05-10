@@ -1,0 +1,19 @@
+{% extends "blog_app/base.html" %}
+
+ {% block content %}
+<div class="content-section"> 
+    <!-- #Adding the CSRF token to prevent the attack -->
+    <form method="post">   
+        {% csrf_token %}
+        <fieldset class="from-group">
+            <legend class="border-bottom mb-4">Delete Post</legend>
+            <h2>are you sure to delete the Post "{{ object.title }}"</h2>
+            <!--Display or print the form, using the verticla bar to use filter of crispy '|'-->
+         </fieldset>
+        <div class="from-group">
+            <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+            <a class="btn btn-outline-secondary"  href="{% url 'post-detail' object.id %}">cancel</a>
+        </div>
+    </form>  
+</div>
+{% endblock content %}
