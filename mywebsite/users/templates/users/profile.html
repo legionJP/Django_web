@@ -9,10 +9,21 @@
             <div class="media-body">
                 <h2 class="account-heading">{{ user.username }}</h2>
                 <p class="text-secondary">{{ user.email }}</p>
-
             </div>
-
         </div>
+        <form method="post" , enctype="multipart/form-data">   <!--value of the method attribute is post, enctype is the MIME type of content that is used to submit the form to the server.-->
+                {% csrf_token %}
+                <fieldset class="from-group">
+                    <legend class="border-bottom mb-4">Your Profile</legend>
+                    <!--Display or print the form, using the verticla bar to use filter of crispy '|'-->
+                    {{ u_form|crispy }}
+                    {{ p_form|crispy }}
+
+                </fieldset>        
+                <div class="from-group">
+                    <button class="btn btn-outline-info"  type="submit">Update Profile</button>
+                </div>
+        </form>
 
     </div>
 {% endblock content %}
