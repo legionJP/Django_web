@@ -1,11 +1,12 @@
 from django.urls import path
 from .views import (PostListView , 
-         PostDetailView,PostCreateView, PostUpdateView,PostDeleteView)
+         PostDetailView,PostCreateView, PostUpdateView,PostDeleteView, UserPostListView)
 from . import views #importing the views from current directory 
 
 urlpatterns = [
     #path('',views.home, name='blog_app-home'), #empty path for home page  #the pattern of empty route is manage by the views.home
     path('',PostListView.as_view(), name='blog_app-home'),
+    path('user/<str:username>',UserPostListView.as_view(), name='user-posts'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'), #particular route for post
     path('post/new/', PostCreateView.as_view(), name='post-create'), #particular route for post
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),  # Using the post-form template and particular route for post
