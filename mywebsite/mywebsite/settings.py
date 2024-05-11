@@ -131,9 +131,15 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 #Creating the new settings for the login redirect of the user which by default redirect to user profile
 
 LOGIN_REDIRECT_URL = 'blog_app-home'
 LOGIN_URL = 'login'
 # LOGOUT_REDIRECT_URL = 'logout'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER =  os.environ.get('MAILUSER')
+EMAIL_HOST_PASSWORD = os.environ.get('MAILPASS')

@@ -48,3 +48,6 @@ python manage.py shell
 
 
 
+#reset password 
+with the requirement 
+ uidb64=uid token=token %}
