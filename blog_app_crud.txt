@@ -1,0 +1,8 @@
+#Create delete update the post using the Class base views 
+
+#Types of the class base views:
+ update , create , list, delete , ..
+
+
+ #blog apps will have list views and the details of the post will be the 
+  details views 
