@@ -1,10 +1,10 @@
 from typing import Any
-from django.db.models.query import QuerySet
+from django.db.models.query import QuerySet 
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render , get_object_or_404
 from .models import Post 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 #import the list views for the homepage 
 from django.views.generic import (ListView , 
@@ -82,10 +82,22 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView): #here d
         if self.request.user == post.author:
             return True
         return False 
+    
+#----------------------------------------------
+
+def search(request):
+    query = request.GET.get('search')
+    if query:
+        results =  Post.objects.filter(title__icontains =query )
+    else:
+        results = Post.objects.all()
+
+    return render(request , 'blog_app/search_result.html',{'results': results})   
+     
 #-----------------------------------------------------------
 def about(request):
     #return HttpResponse('<h1> About Page </h1>')
     return render(request,'blog_app/about.html', {'title':'About'}) #passing the default title 
 
 
-
+ 

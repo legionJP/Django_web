@@ -12,7 +12,8 @@ urlpatterns = [
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),  # Using the post-form template and particular route for post
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
         # this will use the post_confirm_delete.html template and  
-    
+        
+    path('search/',views.search,name = 'blog_app-search'),
     path('about/',views.about, name='blog_app-about'),
 ]
 
