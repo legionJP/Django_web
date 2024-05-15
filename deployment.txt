@@ -1,0 +1,119 @@
+# follow all the steps of the flask series depolyment till requiremtns.txt installtions : 
+
+#in seetings.py 
+
+ALLOWED_HOSTS = ['ip_add/or domain_name']
+
+#static file are handeled diffrent in production 
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+python manage.py collectstatic
+
+128 static files copied to '/home/ubuntu/Django_web/mywebsite/static'.
+
+
+#Using the WSGI Server on the deployement 
+
+# in roo dir 
+sudo apt-get install apache2 
+
+sudo apt-get install libapache2-mod-wsgi-py3
+
+#configure the apache web server 
+
+cd /etc/apache2/sites-availabable/
+
+#copy the default conf to mywebsite.conf
+
+sudo cp 000-default.conf mywebsite.conf
+
+
+# Edit the apache2 sites availablefile
+sudo nano /etc/apache2/sites-availabable/
+
+.
+.
+.
+.
+.
+
+
+Alias /static /home/ubuntu/Django_web/mywebsite/static
+        <Directory /home/ubuntu/Django_web/mywebsite/static>
+                Require all granted
+       </Directory>
+
+       Alias /media /home/ubuntu/Django_web/mywebsite/media
+        <Directory /home/ubuntu/Django_web/mywebsite/media>
+                Require all granted
+       </Directory>
+
+
+        <Directory /home/ubuntu/Django_web/mywebsite/mywebsite>
+                <Files wsgi.py>
+                        Require all granted
+                </Files>
+        </Directory>
+
+        WSGIScriptAlias / /home/ubuntu/Django_web/mywebsite/mywebsite/wsgi.py
+        WSGIDaemonProcess django_app python-path=/home/ubuntu/Django_web/mywebsite  python-home=/home/ubuntu/Django_web/mywebsite/venv
+        WSGIDaemonProcessGroup django_app
+
+</VirtualHost>
+
+
+#activate the conf file of mywebsite 
+
+sudo a2ensite mywebsite.conf
+
+
+sudo a2dissite 000-default.conf
+Site 000-default disabled.
+To activate the new configuration, you need to run:
+  ystemctl reload apache2
+
+
+#change the permission for the apache www data group : 
+
+sudo chown :www-data mywebsite/db.sqlite3
+
+sudo chown 664  db.sqlite3
+
+sudo chown :www-data mywebsite 
+
+sudo chown -R :www-data mywebsite/media/
+
+sudo chown -R 775  mywebsite/media/
+
+
+#Adding the configuration file : 
+sudo nano /etc/config.json
+
+#add the {
+        'SECRET_KEY':   ,
+        'EMAIL_PASS':   ,
+        'EMAIL_USER':  
+}
+
+
+
+import os
+import json
+from pathlib import Path
+
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = config['SECRET_KEY']
+
+
+with open('/etc/config.json') as config_file:
+    config = json.load(config_file)
+
+EMAIL_HOST_USER =  config.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = config.get('EMAIL_PASS')
+
+
+
+DEBUG = False
