@@ -2,13 +2,16 @@
 
 {% load highlight %}
 
-
 {% block content %}
-  <h2>Search Results</h2>
+<center>
+ 
   {% for result in results %}
-    <p>{{ result.title|highlight:query }}</p>
+  <p>{{ result.title }}</p>
+  <p>{{ result.content}} </p>
+  <p> Author : {{ result.author}}</p>
   {% endfor %}
+
+</center>
 {% endblock %}
  
 
-<!-- query:'<span class="height">'|safe -->

@@ -1,5 +1,6 @@
 from typing import Any
 from django.db.models.query import QuerySet 
+from django.db.models import Q
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render , get_object_or_404
@@ -83,17 +84,30 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView): #here d
             return True
         return False 
     
-#----------------------------------------------
+#-------------------------------------------------------------------------------------
 
 def search(request):
-    query = request.GET.get('search')
+    results = Post.objects.all()
+    context = {
+        'results' :results,
+        'query_title': 'all Results',
+        'query': ''
+    }
+    query = request.POST.get('query')
     if query:
-        results =  Post.objects.filter(title__icontains =query )
-    else:
-        results = Post.objects.all()
+        query = query.lower()
+        results =  Post.objects.filter( 
+            Q(title__icontains =query) | Q(content__icontains=query) | Q(author__username__icontains = query))
+        
+        context = {
+            'results': results,
+            'query_title': f"search result for the \"{query}\"",
+            'query': query 
+        } 
 
-    return render(request , 'blog_app/search_result.html',{'results': results})   
-     
+    return render(request , 'blog_app/search.html', context)
+    
+        
 #-----------------------------------------------------------
 def about(request):
     #return HttpResponse('<h1> About Page </h1>')
