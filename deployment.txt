@@ -63,7 +63,7 @@ Alias /static /home/ubuntu/Django_web/mywebsite/static
 
 </VirtualHost>
 
-
+#--------------------------------------------------------------------------
 #activate the conf file of mywebsite 
 
 sudo a2ensite mywebsite.conf
@@ -72,9 +72,11 @@ sudo a2ensite mywebsite.conf
 sudo a2dissite 000-default.conf
 Site 000-default disabled.
 To activate the new configuration, you need to run:
-  ystemctl reload apache2
+  systemctl reload apache2
 
-
+#check the apachectl configtst:
+sudo apachectl configtest
+#----------------------------------------------------------------------------
 #change the permission for the apache www data group : 
 
 sudo chown :www-data mywebsite/db.sqlite3
