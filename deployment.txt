@@ -31,7 +31,7 @@ sudo cp 000-default.conf mywebsite.conf
 
 
 # Edit the apache2 sites availablefile
-sudo nano /etc/apache2/sites-availabable/
+sudo nano /etc/apache2/sites-available/mywebsite.conf
 
 .
 .
@@ -59,7 +59,7 @@ Alias /static /home/ubuntu/Django_web/mywebsite/static
 
         WSGIScriptAlias / /home/ubuntu/Django_web/mywebsite/mywebsite/wsgi.py
         WSGIDaemonProcess django_app python-path=/home/ubuntu/Django_web/mywebsite  python-home=/home/ubuntu/Django_web/mywebsite/venv
-        WSGIDaemonProcessGroup django_app
+        WSGIProcessGroup django_app
 
 </VirtualHost>
 
