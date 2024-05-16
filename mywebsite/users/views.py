@@ -1,6 +1,7 @@
 from django.shortcuts import render , redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import Profile
 #from django.contrib.auth.forms import UserCreationForm #for creating the from from django 
 from .forms import UserRegisterForm,UserUpdateForm , ProfileUpdateForm #using it in the place of  Usercreation 
 
@@ -11,8 +12,10 @@ def register(request):
     if request.method =='POST':     
         form =UserRegisterForm(request.POST)                     #instantiating the form if we get any post request of user form 
         if form.is_valid():
-            form.save()                                            #it will save and hashed the password 
-            username = form.cleaned_data.get('username')           #cleaned_data is dict where the data will be stored 
+            user=form.save(True) 
+            Profile.objects.create(user=user)                                         #it will save and hashed the password 
+            username = form.cleaned_data.get('username')  
+                     #cleaned_data is dict where the data will be stored 
             messages.success(request,f'Account created for {username}! You can Login Now.')
             return redirect('login')                                           #redirecting by blog_app home 
     else:
@@ -22,6 +25,7 @@ def register(request):
 
 @login_required
 def profile(request):
+    profile, created = Profile.objects.get_or_create(user=request.user)
     if request.method =='POST':            
         u_form = UserUpdateForm(request.POST, instance=request.user)                  #instanciating the form in login required
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)

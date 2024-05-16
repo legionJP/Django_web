@@ -14,10 +14,10 @@ class Profile(models.Model):
     #run the migrations
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)    #ruunung the save mehtod of parent class
-
-        img = Image.open(self.image.path)                        
-        if img.height > 300 or img.width >300:
-            output_size = (300,300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
+        super(Profile,self).save(*args, **kwargs)    #ruunung the save mehtod of parent class
+        if self.image:
+            img = Image.open(self.image.path)                        
+            if img.height > 300 or img.width >300:
+                output_size = (300,300)
+                img.thumbnail(output_size)
+                img.save(self.image.path)

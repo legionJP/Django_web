@@ -71,8 +71,9 @@ sudo a2ensite mywebsite.conf
 
 sudo a2dissite 000-default.conf
 Site 000-default disabled.
+
 To activate the new configuration, you need to run:
-  systemctl reload apache2
+sudo systemctl reload apache2
 
 #check the apachectl configtst:
 sudo apachectl configtest
@@ -88,6 +89,16 @@ sudo chown :www-data mywebsite
 sudo chown -R :www-data mywebsite/media/
 
 sudo chown -R 775  mywebsite/media/
+
+
+sudo chown -R www-data:www-data /home/ubuntu/Django_web/mywebsite/blog_app
+sudo chown -R www-data:www-data /home/ubuntu/Django_web/mywebsite/manage.py
+sudo chown -R www-data:www-data /home/ubuntu/Django_web/mywebsite/static
+sudo chown -R www-data:www-data /home/ubuntu/Django_web/mywebsite/users
+sudo chown -R www-data:www-data /home/ubuntu/Django_web/mywebsite/venv
+
+
+
 
 
 #Adding the configuration file : 
@@ -119,3 +130,13 @@ EMAIL_HOST_PASSWORD = config.get('EMAIL_PASS')
 
 
 DEBUG = False
+
+
+sudo service apache2 restart
+
+#see the server log error 
+sudo cat /var/log/apache2/error.log
+
+#see the help from the Django Docs : 
+
+https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
