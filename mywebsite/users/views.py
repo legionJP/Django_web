@@ -25,7 +25,6 @@ def register(request):
 
 @login_required
 def profile(request):
-    profile, created = Profile.objects.get_or_create(user=request.user)
     if request.method =='POST':            
         u_form = UserUpdateForm(request.POST, instance=request.user)                  #instanciating the form in login required
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
