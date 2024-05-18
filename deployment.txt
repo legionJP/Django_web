@@ -157,3 +157,30 @@ sudo snap install --classic certbot
 or 
 
 sudo apt install certbot python3-certbot-apache
+
+#Go to following conf file and check the changes 
+
+$ sudo nano /etc/apache2/sites-available/mywebsite-le-ssl.conf
+
+# you can comment out he alias in this file because it is available in above file
+$ sudo nano /etc/apache2/sites-available/mywebsite.conf
+
+#remove the comment of the WSGIProcess command
+$ sudo nano /etc/apache2/sites-available/mywebsite-le-ssl.conf
+
+
+Test automatic renewal:
+sudo certbot renew --dry-run
+
+
+apachectl configtest
+sudo apachectl configtest
+
+Renew the ssl automatic : 
+sudo crontab -e 
+
+1. to chhose the nano
+
+30 4 1 * *  sudo certbot renew --quite 
+
+# run on 4:30 0f every  month on evry week , run on background
