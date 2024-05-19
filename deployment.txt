@@ -40,15 +40,15 @@ sudo nano /etc/apache2/sites-available/mywebsite.conf
 .
 
 
-Alias /static /home/ubuntu/Django_web/mywebsite/static
+        Alias /static /home/ubuntu/Django_web/mywebsite/static
         <Directory /home/ubuntu/Django_web/mywebsite/static>
                 Require all granted
-       </Directory>
+        </Directory>
 
-       Alias /media /home/ubuntu/Django_web/mywebsite/media
+        Alias /media /home/ubuntu/Django_web/mywebsite/media
         <Directory /home/ubuntu/Django_web/mywebsite/media>
                 Require all granted
-       </Directory>
+        </Directory>
 
 
         <Directory /home/ubuntu/Django_web/mywebsite/mywebsite>
@@ -131,7 +131,7 @@ EMAIL_HOST_PASSWORD = config.get('EMAIL_PASS')
 
 DEBUG = False
 
-
+#-----------------------------------------------
 sudo service apache2 restart
 
 #see the server log error 
@@ -147,7 +147,7 @@ https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 using the Certbot :
 
 # select the server : apache and the os version like ubuntu20 
- sudo apt-get update 
+sudo apt-get update 
 sudo apt-get install
 
 # you need to PPA repo for the ubuntu 18 or less than ubunut 20 :
@@ -184,3 +184,18 @@ sudo crontab -e
 30 4 1 * *  sudo certbot renew --quite 
 
 # run on 4:30 0f every  month on evry week , run on background
+
+
+
+#some usefull command : 
+
+List Available Sites: First, check which sites are available and enabled.
+
+sudo ls /etc/apache2/sites-available
+sudo ls /etc/apache2/sites-enabled
+
+Disable the Site: Use the a2dissite command with the site name, not the full path.
+sudo a2dissite mywebsite.conf.save
+
+
+sudo systemctl reload apache2
