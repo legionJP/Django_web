@@ -176,7 +176,7 @@ sudo certbot renew --dry-run
 apachectl configtest
 sudo apachectl configtest
 
-Renew the ssl automatic : 
+Renew the ssl automaticaly after it expires  : 
 sudo crontab -e 
 
 1. to chhose the nano
