@@ -1,3 +1,7 @@
+#1------
+#sudo apt-get install apache2
+#--------
+
 # follow all the steps of the flask series depolyment till requiremtns.txt installtions : 
 
 #in seetings.py 
@@ -16,10 +20,11 @@ python manage.py collectstatic
 
 #Using the WSGI Server on the deployement 
 
-# in roo dir 
+# in root dir 
 sudo apt-get install apache2 
 
 sudo apt-get install libapache2-mod-wsgi-py3
+
 
 #configure the apache web server 
 
@@ -85,10 +90,13 @@ sudo chown :www-data mywebsite/db.sqlite3
 sudo chown 664  db.sqlite3
 
 sudo chown :www-data mywebsite 
+sudo chmod 775 mywebsite/
 
 sudo chown -R :www-data mywebsite/media/
 
 sudo chown -R 775  mywebsite/media/
+
+sudo chown -R www-data:www-data mywebsite/mywebsite
 
 
 sudo chown -R www-data:www-data /home/ubuntu/Django_web/mywebsite/blog_app
@@ -131,7 +139,7 @@ EMAIL_HOST_PASSWORD = config.get('EMAIL_PASS')
 
 DEBUG = False
 
-#-----------------------------------------------
+
 sudo service apache2 restart
 
 #see the server log error 
@@ -147,7 +155,7 @@ https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 using the Certbot :
 
 # select the server : apache and the os version like ubuntu20 
-sudo apt-get update 
+ sudo apt-get update 
 sudo apt-get install
 
 # you need to PPA repo for the ubuntu 18 or less than ubunut 20 :
@@ -176,7 +184,7 @@ sudo certbot renew --dry-run
 apachectl configtest
 sudo apachectl configtest
 
-Renew the ssl automaticaly after it expires  : 
+Renew the ssl automatic : 
 sudo crontab -e 
 
 1. to chhose the nano
@@ -184,18 +192,3 @@ sudo crontab -e
 30 4 1 * *  sudo certbot renew --quite 
 
 # run on 4:30 0f every  month on evry week , run on background
-
-
-
-#some usefull command : 
-
-List Available Sites: First, check which sites are available and enabled.
-
-sudo ls /etc/apache2/sites-available
-sudo ls /etc/apache2/sites-enabled
-
-Disable the Site: Use the a2dissite command with the site name, not the full path.
-sudo a2dissite mywebsite.conf.save
-
-
-sudo systemctl reload apache2
