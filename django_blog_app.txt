@@ -1,13 +1,21 @@
    #=========================== Django =================================#
  
 Here you will be find out the path and guide to learn and build app using Django
+
 #install virtual env 
+sudo apt install python3-pip
+
+pip install Django
+
 
 pyhton -m venv myenv
 
-#activate env :
+#activate env in Windows:
 ./myenv/Scripts/activate
 
+#activate env in linux:
+source myenv/bin/activate
+#===================================================================#
 Django -admin 
 
 

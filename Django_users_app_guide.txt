@@ -4,10 +4,10 @@ python manage.py stratapp users
 
 #add the app in the mywebsites project's seettings.py installed list:
 
-
 #install the crispy -form for user registrations 
 
-pip install django-crispy-form
+pip install django-crispy-forms
+pip install crispy-bootstrap4
 
 #Add the installed app in settings.py 
 'crispy_forms',
@@ -24,6 +24,7 @@ CRISPY_TEMPLATE_PACK ='bootstrap4
 
  #Implemetning logging 
 
+#==========================================================================================#
 #Accesing the Profile Models 
 python manage.py shell
  >>> from django.contrib.auth.models import User
