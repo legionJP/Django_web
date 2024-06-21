@@ -42,7 +42,7 @@ sudo nano /etc/apache2/sites-available/mywebsite.conf
 .
 .
 .
-.
+.-----------------------------------------------------------------------
 
 
         Alias /static /home/ubuntu/Django_web/mywebsite/static
