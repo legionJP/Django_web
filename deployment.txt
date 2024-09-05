@@ -139,6 +139,9 @@ EMAIL_HOST_PASSWORD = config.get('EMAIL_PASS')
 
 DEBUG = False
 
+#Starting the server 
+
+sudo systemctl start apache2
 
 sudo service apache2 restart
 
