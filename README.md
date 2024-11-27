@@ -210,3 +210,24 @@ Ensure your EC2 instance’s security group allows SSH access from GitHub Action
 Push a change to your GitHub repository to trigger the workflow and verify that the deployment works as expected.
 
 By following these steps, you can configure your EC2 instance to work with a new GitHub repository and set up a CI/CD pipeline using GitHub Actions. If you encounter any issues or have further questions, feel free to ask!
+
+#### Notes for MySQL Setup
+```
+# 
+
+
+
+
+# sudo apt-get remove --purge mysql-server mysql-client mysql-common
+# sudo apt-get autoremove
+# sudo apt-get autoclean
+
+# sudo apt-get install mysql-server
+# sudo mysql_secure_installation
+# sudo systemctl start mysql
+# sudo systemctl enable mysql
+
+# FLUSH PRIVILEGES;
+#ALTER USER 'root'@'localhost' IDENTIFIED BY 'ThisisMyDb';
+
+```
