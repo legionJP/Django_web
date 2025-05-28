@@ -10,7 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2     
+        
+      - name: Create reports directory
+        run: mkdir -p reports
+        
       - name: Checkmarx One CLI Action
         uses: checkmarx/ast-github-action@main #Github Action version
         with:
@@ -20,6 +24,10 @@ jobs:
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
           additional_params: --report-format sarif --output-path reports/cx_result.sarif
+      
+      - name: Fix permissions
+        run: chmod -R 755 reports
+        
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with: 
