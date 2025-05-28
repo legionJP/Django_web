@@ -1,0 +1,26 @@
+name: Checkmarx One Scan
+on:
+  push:
+    branches:
+      - main
+      - master
+      - dev
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkmarx One CLI Action
+        uses: checkmarx/ast-github-action@main #Github Action version
+        with:
+          project_name: CxGitHubActionJamna
+          cx_tenant: test_naftali
+          base_uri: https://eu.ast.checkmarx.net/
+          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
+          cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+        with: 
+          # Path to SARIF file relative to the root of the repository
+          sarif_file: cx_result.sarif
