@@ -1,3 +1,45 @@
+# name: Checkmarx One Scan
+# on:
+#   push:
+#     branches:
+#       - main
+#       - master
+#       - dev
+# permissions:
+#   contents: read # for actions/checkout to fetch code
+#   security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+#   actions: read # only required for a private repository by github/codeql-action/upload-sarif
+#   pull-requests: write # needed to write pr decorations
+  
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2     
+        
+#       # - name: Create reports directory
+#       #   run: mkdir -p reports
+        
+#       - name: Checkmarx One CLI Action
+#         uses: checkmarx/ast-github-action@main #Github Action version
+#         with:
+#           project_name: CxGitHubActionJamna
+#           cx_tenant: test_naftali
+#           base_uri: https://eu.ast.checkmarx.net/
+#           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
+#           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
+#           additional_params: --report-format sarif --output-path cx_result.sarif
+      
+#       # - name: Fix permissions
+#       #   run: chmod -R 755 reports
+        
+#       - name: Upload SARIF file
+#         uses: github/codeql-action/upload-sarif@v3
+#         with: 
+#           # Path to SARIF file relative to the root of the repository
+#           sarif_file: cx_result.sarif
+
 name: Checkmarx One Scan
 on:
   push:
@@ -5,37 +47,43 @@ on:
       - main
       - master
       - dev
+      
 permissions:
-  contents: read # for actions/checkout to fetch code
-  security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-  actions: read # only required for a private repository by github/codeql-action/upload-sarif
-  pull-requests: write # needed to write pr decorations
-  
+  contents: read
+  security-events: write
+  actions: read
+  pull-requests: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2     
-        
-      # - name: Create reports directory
-      #   run: mkdir -p reports
-        
-      - name: Checkmarx One CLI Action
-        uses: checkmarx/ast-github-action@main #Github Action version
+        uses: actions/checkout@v2
+
+      - name: Run Checkmarx One CLI
+        uses: checkmarx/ast-github-action@main
         with:
-          project_name: CxGitHubActionJamna
-          cx_tenant: test_naftali
-          base_uri: https://eu.ast.checkmarx.net/
+          project_name: CxGitHub
+          cx_tenant: name
+          base_uri: uri
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
           additional_params: --report-format sarif --output-path cx_result.sarif
-      
-      # - name: Fix permissions
-      #   run: chmod -R 755 reports
-        
+
+      - name: Ensure SARIF file is readable
+        run: |
+          if [ -f "cx_result.sarif" ]; then
+            chmod 644 cx_result.sarif
+          else
+            echo "SARIF file not found!"
+            exit 1
+          fi
+
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
-        with: 
-          # Path to SARIF file relative to the root of the repository
+        with:
           sarif_file: cx_result.sarif
+          checkout_path: ${{ github.workspace }}
+          wait-for-processing: true
+
