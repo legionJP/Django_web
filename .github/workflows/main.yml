@@ -71,14 +71,14 @@ jobs:
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
           additional_params: --report-format sarif --output-path cx_result.sarif
 
-      - name: Ensure SARIF file is readable
-        run: |
-          if [ -f "cx_result.sarif" ]; then
-            chmod 644 cx_result.sarif
-          else
-            echo "SARIF file not found!"
-            exit 1
-          fi
+      # - name: Ensure SARIF file is readable
+      #   run: |
+      #     if [ -f "cx_result.sarif" ]; then
+      #       chmod 644 cx_result.sarif
+      #     else
+      #       echo "SARIF file not found!"
+      #       exit 1
+      #     fi
 
       # - name: Upload SARIF file
       #   uses: github/codeql-action/upload-sarif@v3
