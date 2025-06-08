@@ -87,8 +87,8 @@ jobs:
            -v ${{ github.workspace }}/output_fold:/output_fold:z \
            -v ${{ github.workspace }}/dast-config:/dast-config:z \
            checkmarx/dast:latest web \
-           --base-url=https://ast-master-components.dev.cxast.net \
-           --environment-id=9257043d-fce7-4566-9b51-025f0164f5f7 \
+           --base-url=http://www.testfire.net \
+           --environment-id=13c98c03-a45b-49b4-a17d-c36c59909cbc \
            --config=/dast-config/gin_juice.yaml \
            --output=/output_fold \
            --timeout=10000 \
