@@ -1,0 +1,88 @@
+env:
+    contexts:
+        - authentication:
+            method: script
+            parameters:
+                script: /path/demotestfire1.zst
+                scriptEngine: Mozilla Zest
+            verification:
+                loggedInRegex: Sign Off
+                loggedOutRegex: Login
+                method: response
+                pollFrequency: 60
+                pollPostData: ""
+                pollUnits: requests
+                pollUrl: ""
+          includePaths:
+            - https://demo.testfire.net/.*
+          name: cencora
+          sessionManagement:
+            method: cookie
+          structure: {}
+          technology: {}
+          urls:
+            - https://demo.testfire.net/
+          users:
+            - credentials: {}
+              name: AuthUser
+    parameters:
+        failOnError: true
+        failOnWarning: false
+        progressToStdout: true
+jobs:
+    - parameters:
+        maxAlertsPerRule: 0
+        maxBodySizeInBytesToScan: 0
+      type: passiveScan-config
+    - parameters:
+        acceptCookies: true
+        context: cencora
+        handleODataParametersVisited: false
+        handleParameters: use_all
+        maxChildren: 0
+        maxDepth: 5
+        maxDuration: 0
+        maxParseSizeBytes: 2621440
+        parseComments: true
+        parseGit: false
+        parseRobotsTxt: true
+        parseSVNEntries: false
+        parseSitemapXml: true
+        postForm: true
+        processForm: true
+        sendRefererHeader: true
+        user: AuthUser
+        userAgent: ""
+      type: spider
+    - parameters:
+        context: cencora
+        numberOfBrowsers: 8
+        runOnlyIfModern: false
+        user: AuthUser
+      type: spiderAjax
+    - parameters:
+        maxDuration: 20
+      type: passiveScan-wait
+    - parameters:
+        context: cencora
+        maxAlertsPerRule: 1
+        maxRuleDurationInMins: 1
+        maxScanDurationInMins: 5
+        policy: ""
+        user: AuthUser
+      policyDefinition:
+        defaultStrength: medium
+        defaultThreshold: medium
+      type: activeScan
+    - name: report
+      parameters:
+        reportDir: /output/dast-output-3112591701
+        reportFile: ZAP-Report
+        template: traditional-json-plus
+      type: report
+    - name: export
+      parameters:
+        fileName: /output/dast-output-3112591701/ZAP-Sites-Tree.yaml
+        source: sitestree
+        type: yaml
+      type: export
