@@ -1,0 +1,53 @@
+name: CxFlow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    # The type of runner that the job will run on - Ubuntu is required as Docker is leveraged for the action
+    runs-on: self-hosted
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Verifies Git installation
+      - name: Verify Git Installation
+        run: 
+          echo "Checking Git version..."
+          git --version
+
+      # Runs the Checkmarx Scan leveraging the latest version of CxFlow
+      - name: Checkmarx CxFlow Action
+        uses: checkmarx-ts/checkmarx-cxflow-github-action@v2.3
+        #uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.9
+
+        with:
+          project: ${{ secrets.CHECKMARX_PROJECT }}
+          team: ${{ secrets.CHECKMARX_TEAMS }}
+          checkmarx_url: ${{ secrets.CHECKMARX_URL }}
+          checkmarx_username: ${{ secrets.CHECKMARX_USERNAME }}
+          checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }}
+          checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }}
+          scanners: sast
+          bug_tracker: GitHub
+          #bug-tracker: WAIT
+
+
+          params: >
+            --github
+            --namespace=${{ github.repository_owner }}
+            --checkmarx.settings-override=true
+            --repo-name=${{ github.event.repository.name }}
+            --branch=${{ github.ref_name }}
+            --cx-flow.filter-severity
+            --cx-flow.filter-category
+            --checkmarx.disable-clubbing=true
+            --repo-url=${{ github.event.repository.url }}
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: cx.sarif
